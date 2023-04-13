@@ -3,3 +3,12 @@ version: '0.1'
 main: dripperscore.DripperS_Core
 authors: [Minematador, xSrJowi, DripperNW]
 description: A Core for Survival Server
+
+
+
+commands:
+  dfreeze:
+    description: Comando para congelar a alguien
+    usage: /dfreeze <username>
+    aliases:
+      - freeze

@@ -1,10 +1,12 @@
 package dripperscore;
 
+
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.IOException;
+
 
 public final class DripperS_Core extends JavaPlugin {
+
 
 
     @Override
@@ -12,7 +14,7 @@ public final class DripperS_Core extends JavaPlugin {
         // Plugin startup logic
         printOnEnableMessage("global");
         getConfigFile();
-
+        enableCommands();
 
     }
 
@@ -23,6 +25,9 @@ public final class DripperS_Core extends JavaPlugin {
     }
 
 
+    public void enableCommands(){
+        //getCommand("dfreeze").setExecutor(new Freeze());
+    }
 
     public void printOnEnableMessage(String module) {
         try {
