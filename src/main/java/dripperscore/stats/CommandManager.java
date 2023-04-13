@@ -1,4 +1,4 @@
-package dripperscore.staffMode;
+package dripperscore.stats;
 
 import dripperscore.DripperS_Core;
 import lombok.Getter;
@@ -14,5 +14,13 @@ public class CommandManager {
     }
 
 
+    public void enableListeners(){
 
+
+    }
+    public void enableCommands(){
+        //plugin.getCommand("prueba").setExecutor(new PruebaCommand(this));
+    }
 }
+
+

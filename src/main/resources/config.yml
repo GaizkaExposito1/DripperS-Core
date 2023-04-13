@@ -7,11 +7,17 @@
 
 # Permissions: To use some commands you need to give them some permission
 #
-#              -ADMINISTRATOR permissions:
+#              - ADMINISTRATOR permissions:
 #                 - dripperSCore.*
 #                 - dripperSCore.StaffMode.*
-#                 - dripperSCore.
+#                 - dripperSCore.Jobs.*
+#                 - dripperSCore.Stats.*
 #
+#             - USER permissions:
+#
+#                 - Jobs:
+#                 - Stats:
+#                 - Jobs:
 #
 #
 #
