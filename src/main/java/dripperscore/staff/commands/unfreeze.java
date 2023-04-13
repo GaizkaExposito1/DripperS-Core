@@ -4,7 +4,6 @@ import dripperscore.DripperS_Core;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Color;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,49 +12,46 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class freeze implements CommandExecutor {
+public class unfreeze implements CommandExecutor {
     @Getter
     private final DripperS_Core core;
     private boolean Freezed;
 
-    public freeze(DripperS_Core plugin) {
+    public unfreeze(DripperS_Core plugin) {
         this.core = plugin;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args ) {
-        String FreezedMenssage = core.getConfig().getString("PlayerFreezedText");
+        String unFreezedMenssage = core.getConfig().getString("PlayerUnFreezedText");
 
         if(sender instanceof Player){
-            Player player = (Player) sender;
+            Player p = (Player) sender;
             if(args.length == 0){
-                player.sendMessage(ChatColor.RED+"You did not provide any arguments when running the command");
-                player. sendMessage(ChatColor.RED+"Example: /dfreeze <payer>");
+                p.sendMessage(ChatColor.RED+"You did not provide any arguments when running the command");
+                p. sendMessage(ChatColor.RED+"Example: /dunfreeze <payer>");
             }else{
                 String username = args[0];
                 Player target =Bukkit.getServer().getPlayerExact(username);
 
                 if(target == null){
-                    player.sendMessage(ChatColor.RED+"This player is not online");
+                    p.sendMessage(ChatColor.RED+"This player is not online");
                 }else{
-                    Freeze(target, player, username,FreezedMenssage);
+                    unFreeze(target, p,username,unFreezedMenssage);
                 }
-                //p.sendMessage("Username: " + username);
             }
         }else{
             Bukkit.getLogger().info(command + "can only execute being a player");
         }
 
-
         return true;
     }
+    private void unFreeze(Player target, Player player,String username,String unFreezedMenssage){
+        target.setWalkSpeed(0.2f);
+        target.removePotionEffect(PotionEffectType.JUMP);
+        target.setGameMode(GameMode.SURVIVAL);
+        player.sendMessage(ChatColor.GREEN +username + "is being Unfreezed");
 
-
-    private void Freeze(Player target, Player player,String username,String FreezedMenssage){
-        target.setWalkSpeed(0);
-        target.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 200));
-        target.setGameMode(GameMode.ADVENTURE);
-        player.sendMessage(ChatColor.YELLOW +username + "is being freezed");
-        target.sendMessage(ChatColor.YELLOW +FreezedMenssage);
+        target.sendMessage(ChatColor.GREEN +unFreezedMenssage);
     }
 }

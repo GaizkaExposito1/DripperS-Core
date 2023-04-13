@@ -1,6 +1,8 @@
 package dripperscore;
 
 
+import dripperscore.staff.commands.freeze;
+import dripperscore.staff.commands.unfreeze;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
@@ -26,7 +28,8 @@ public final class DripperS_Core extends JavaPlugin {
 
 
     public void enableCommands(){
-        //getCommand("dfreeze").setExecutor(new Freeze());
+        getCommand("dfreeze").setExecutor(new freeze(this));
+        getCommand("dunfreeze").setExecutor(new unfreeze(this));
     }
 
     public void printOnEnableMessage(String module) {
