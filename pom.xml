@@ -93,5 +93,10 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.j256.ormlite</groupId>
+            <artifactId>ormlite-jdbc</artifactId>
+            <version>8.0.32</version>
+        </dependency>
     </dependencies>
 </project>
