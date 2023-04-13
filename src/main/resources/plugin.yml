@@ -1,0 +1,5 @@
+name: DripperS-Core
+version: '${project.version}'
+main: dripperscore.DripperS_Core
+authors: [Minematador, xSrJowi, DripperNW]
+description: A Core for Survival Server

@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="dripperS-Core">
+    <output-path>$PROJECT_DIR$/out/artifacts/dripperS_Core</output-path>
+    <root id="archive" name="dripperS-Core.jar">
+      <element id="module-output" name="DripperS-Core" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/plugin.yml" />
+    </root>
+  </artifact>
+</component>
