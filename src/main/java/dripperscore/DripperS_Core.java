@@ -55,7 +55,6 @@ public final class DripperS_Core extends JavaPlugin {
     }
     public void enableCommands(){
         getCommand("dfreeze").setExecutor(new freezeCommand(this));
-        getCommand("dunfreeze").setExecutor(new unfreezeCommand(this));
     }
 
     public void printOnEnableMessage(String module) {
