@@ -4,6 +4,7 @@ package dripperscore;
 import dripperscore.staff.commands.freezeCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -27,7 +28,7 @@ public final class DripperS_Core extends JavaPlugin {
 
     public void createBBDDConnection(){
         if(getConfig().getString("sqlConnection").equalsIgnoreCase("true")){
-            /**
+            /*
              * DARLE UNA PENSADA
              * DARLE UNA PENSADA
              * DARLE UNA PENSADA
@@ -77,6 +78,7 @@ public final class DripperS_Core extends JavaPlugin {
         getConfig().options().copyDefaults();
         saveDefaultConfig();
     }
+
     public void printOnDisableMessage(String module){
         try {
             if(module.equalsIgnoreCase("staffMode")){

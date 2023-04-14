@@ -45,14 +45,18 @@ public class freezeCommand implements CommandExecutor {
                     if(target == null){
                         player.sendMessage(ChatColor.RED+"This player is not online");
                     }else{
-                        if(!this.freezed.containsKey(player.getUniqueId())){
-                            this.freezed.put(player.getUniqueId(),true);
-                            Freeze(target, player, username);
-                            target.sendMessage(ChatColor.YELLOW +FreezedMenssage);
+                        if(player != target){
+                            if(!this.freezed.containsKey(player.getUniqueId())){
+                                this.freezed.put(player.getUniqueId(),true);
+                                Freeze(target, player, username);
+                                target.sendMessage(ChatColor.YELLOW +FreezedMenssage);
+                            }else{
+                                this.freezed.remove(player.getUniqueId());
+                                unFreeze(target, player,username);
+                                target.sendMessage(ChatColor.GREEN + unFreezedMenssage);
+                            }
                         }else{
-                            this.freezed.remove(player.getUniqueId());
-                            unFreeze(target, player,username);
-                            target.sendMessage(ChatColor.GREEN + unFreezedMenssage);
+                            player.sendMessage(ChatColor.RED+"You cant Freeze Yourself");
                         }
                     }
                 }
@@ -69,12 +73,12 @@ public class freezeCommand implements CommandExecutor {
         target.setWalkSpeed(0);
         target.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 200));
         target.setGameMode(GameMode.ADVENTURE);
-        player.sendMessage(ChatColor.YELLOW +username + "is being freezed");
+        player.sendMessage(ChatColor.YELLOW + username + "is being freezed");
     }
     private void unFreeze(Player target, Player player,String username){
         target.setWalkSpeed(0.2f);
         target.removePotionEffect(PotionEffectType.JUMP);
         target.setGameMode(GameMode.SURVIVAL);
-        player.sendMessage(ChatColor.GREEN +username + "is being Unfreezed");
+        player.sendMessage(ChatColor.GREEN + username + "is being Unfreezed");
     }
 }

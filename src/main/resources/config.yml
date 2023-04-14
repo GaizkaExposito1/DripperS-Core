@@ -11,7 +11,8 @@
 #                 - dripperscore.*
 #                 - dripperscore.staffmode.*
 #                 - dripperscore.staffmode.freeze
-#                 - dripperscore.staffmode.unfreeze
+#                 - dripperscore.staffmode.vanish
+#                 - dripperscore.staffmode.vanish.others
 #                 - dripperSCore.Jobs.*
 #                 - dripperSCore.Stats.*
 #
@@ -33,6 +34,7 @@
 # GENERAL PLUGIN SETTINGS
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 notPermissonsText: You do noty have the required permission to run this command.
+lang: en
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 # SQL CONNECTION
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
@@ -46,9 +48,9 @@ sqlPass:
 # STAFF
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #
-# FREEZE
-PlayerFreezedText: You have been frozen
-PlayerUnFreezedText: You have been unfrozen
+# VANISH
+PlayerVanishedext: You are invisible to others
+PlayerUnVanishedText: You are not invisible to others
 #
 #
 #

@@ -13,11 +13,15 @@ commands:
     aliases:
       - staff
   dfreeze:
-    description: Comando para congelar a alguien
+    description: Comando para congelar/descongelar a alguien
     usage: /dfreeze <username>
     aliases:
       - freeze
-
+  dvanish:
+    description: Comando para ser invisible/visible
+    usage: /dvanish
+    aliases:
+      - vanish
 #  dunfreeze:
 #    description: Comando para congelar a alguien
 #    usage: /dfreeze <username>

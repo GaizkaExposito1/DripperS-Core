@@ -1,0 +1,17 @@
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# GENERAL PLUGIN MESSAGES
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+NoPermisson:
+NoArguments:
+NoOnline:
+OnlyPlayer: can only execute being a player
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# STAFF PLUGIN MESSAGES
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Freeze
+SelfFreeze: You cant Freeze Yourself
+FreezedSomebody: is being Freezed
+PlayerFreezed: You have been frozen
+UnFreezedSomebody: is being Unfreezed
+PlayerUnFreezed: You have been unfrozen
