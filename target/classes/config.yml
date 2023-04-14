@@ -1,0 +1,54 @@
+# ------------------------------ #
+#
+#  DripperS-Core v0.1
+#  (c) Minematador , xSrJowi, DripperNW
+#
+# ------------------------------ #
+
+# Permissions: To use some commands you need to give them some permission
+#
+#              - ADMINISTRATOR permissions:
+#                 - dripperscore.*
+#                 - dripperscore.staffmode.*
+#                 - dripperscore.staffmode.freeze
+#                 - dripperscore.staffmode.unfreeze
+#                 - dripperSCore.Jobs.*
+#                 - dripperSCore.Stats.*
+#
+#             - USER permissions:
+#
+#                 - Jobs:
+#                 - Stats:
+#                 - Jobs:
+#
+#
+#
+#
+#              Make sure to remove them from the other groups
+#
+#
+#
+#              when giving a new permission.
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# GENERAL PLUGIN SETTINGS
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+notPermissonsText: You do noty have the required permission to run this command.
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# SQL CONNECTION
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+sqlConnection : false
+sqlType: MySQL
+sqlUrl: localhost
+sqlBBDDName: Prueba
+sqlUser: root
+sqlPass:
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# STAFF
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#
+# FREEZE
+PlayerFreezedText: You have been frozen
+PlayerUnFreezedText: You have been unfrozen
+#
+#
+#

@@ -7,6 +7,11 @@ description: A Core for Survival Server
 
 
 commands:
+  staff:
+    description: staff command for get staff items !CAUTION YOUR INVENTORY COULD BE DELETED!
+    usage: /dstaff
+    aliases:
+      - staff
   dfreeze:
     description: Comando para congelar a alguien
     usage: /dfreeze <username>

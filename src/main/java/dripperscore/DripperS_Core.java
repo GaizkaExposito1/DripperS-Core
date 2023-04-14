@@ -2,7 +2,6 @@ package dripperscore;
 
 
 import dripperscore.staff.commands.freezeCommand;
-import dripperscore.staff.commands.unfreezeCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.Connection;
@@ -11,9 +10,6 @@ import java.sql.SQLException;
 
 
 public final class DripperS_Core extends JavaPlugin {
-
-
-
     @Override
     public void onEnable() {
         // Plugin startup logic
@@ -52,12 +48,10 @@ public final class DripperS_Core extends JavaPlugin {
                 this.getLogger().info("DripperS-Core --> Error connecting SQL");
                 this.getLogger().info(e.toString());
             }
-
         }else{
             this.getLogger().info("DripperS-Core --> Enabling WithOut SQL Connection");
 
         }
-
     }
     public void enableCommands(){
         getCommand("dfreeze").setExecutor(new freezeCommand(this));
@@ -76,17 +70,14 @@ public final class DripperS_Core extends JavaPlugin {
                 this.getLogger().info("DripperS-Core ");
                 this.getLogger().info("Successfully Enabled");
             }
-
-
         } catch (Exception ignored) {
+            //Añadir excepcion
         }
     }
     private void getConfigFile(){
         getConfig().options().copyDefaults();
         saveDefaultConfig();
     }
-
-
     public void printOnDisableMessage(String module){
         try {
             if(module.equalsIgnoreCase("staffMode")){
@@ -99,10 +90,8 @@ public final class DripperS_Core extends JavaPlugin {
                 this.getLogger().info("DripperS-Core");
                 this.getLogger().info("Successfully Disabled");
             }
-
-
         } catch (Exception ignored) {
+            //Añadir excepcion
         }
     }
-
 }

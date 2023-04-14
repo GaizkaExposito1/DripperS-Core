@@ -17,8 +17,9 @@ commands:
     usage: /dfreeze <username>
     aliases:
       - freeze
-  dunfreeze:
-    description: Comando para congelar a alguien
-    usage: /dfreeze <username>
-    aliases:
-      - unfreeze
+
+#  dunfreeze:
+#    description: Comando para congelar a alguien
+#    usage: /dfreeze <username>
+#    aliases:
+#      - unfreeze
