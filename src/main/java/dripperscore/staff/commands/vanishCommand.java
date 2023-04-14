@@ -104,7 +104,7 @@ public class vanishCommand implements CommandExecutor {
             people.hidePlayer(target);
         }
         invisible_List.add(target);
-        player.sendMessage(Lang.TITLE.toString() + Lang.PLAYER_VANISHED);
+        player.sendMessage(Lang.TITLE.toString() + Lang.PLAYER_VANISHED.toString().replace("%t", target.getName()));
         target.sendMessage(Lang.TITLE.toString() + Lang.STAFF_VANISHED);
     }
     private void unVanishOther(Player target, Player player, String username){
@@ -112,7 +112,7 @@ public class vanishCommand implements CommandExecutor {
             people.showPlayer(target);
         }
         invisible_List.remove(target);
-        player.sendMessage(Lang.TITLE.toString() + Lang.PLAYER_UNVANISHED);
+        player.sendMessage(Lang.TITLE.toString() + Lang.PLAYER_UNVANISHED.toString().replace("%t", target.getName()));
         target.sendMessage(Lang.TITLE.toString() + Lang.STAFF_UNVANISHED);
     }
 }
