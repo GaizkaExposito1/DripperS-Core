@@ -7,7 +7,7 @@
 
 title-name: "&3DripperS-Core: "
 no-permissions: "&cYou don't have permission for that!"
-invalid-args: "You did not provide any arguments when running the command."
+invalid-args: "&cYou did not provide any arguments when running the command."
 no-online: "&cThe player is not online!"
 player-only: "&cSorry but that can only be run by a player!"
 must-be-number: "&cYou need to specify a number, not a word."
@@ -24,3 +24,8 @@ staff-unvanished: "&2You now are visible to others."
 staff-player-vanished: "&5%t is being invisible to others."
 staff-player-unvanished: "&2%t is being visible to others."
 staff-vanis-list : "&dStaff in vanish: "
+
+fly_enabled: "&2Fly has been enabled"
+fly_disabled: "&cFly has been disabled"
+fly_other_enabled: "&2Fly to %t has been enabled"
+fly_other_disabled: "&cFly to %t has been disabled"

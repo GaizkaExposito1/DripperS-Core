@@ -4,7 +4,26 @@ main: dripperscore.DripperS_Core
 authors: [Minematador, xSrJowi, DripperNW]
 description: A Core for Survival Server
 
+permissions:
+  dripperscore.*:
+    description: gives you all plugin permissons.
+    default: op
+  dripperscore.staffmode.*:
+    description: gives you all staff apart permissons.
+    default: op
+  dripperscore.staffmode.freeze:
+    description: gives you freeze and unfreeze permisson.
+  dripperscore.staffmode.vanish:
+    description: gives you to set invisible.
+  dripperscore.staffmode.vanish.others:
+    description: gives you to set invisible to other player.
+  dripperscore.staffmode.vanishlist:
+    description: gives you to see a list with vanished players.
 
+  dripperscore.fly:
+    description: enable/disable fly.
+  dripperscore.fly.others:
+    description: enable/disable fly to others
 
 commands:
   dstaff:
@@ -29,6 +48,11 @@ commands:
       - vlist
       - vanishlist
       - dvanishlist
+  dfly:
+    description: Commando para Volaaaaaar
+    usage: /dfly
+    aliases:
+      - fly
 #  dunfreeze:
 #    description: Comando para congelar a alguien
 #    usage: /dfreeze <username>

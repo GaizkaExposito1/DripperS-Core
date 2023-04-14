@@ -20,7 +20,8 @@
 #                 - dripperSCore.Stats.*
 #
 #             - USER permissions:
-#
+#                - dripperscore.fly
+#                - dripperscore.fly.others
 #                 NOT IMPLEMENTED
 #                 - Jobs:
 #                 - Stats:

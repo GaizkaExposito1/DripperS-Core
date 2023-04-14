@@ -2,9 +2,11 @@ package dripperscore;
 
 
 import dripperscore.lang.Lang;
+import dripperscore.other.commands.flyCommand;
 import dripperscore.staff.commands.freezeCommand;
 import dripperscore.staff.commands.staffCommand;
 import dripperscore.staff.commands.vanishCommand;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -28,12 +30,14 @@ public final class DripperS_Core extends JavaPlugin {
         loadLang();
         enableCommands();
         createBBDDConnection();
+        this.getLogger().fine("Pruebaaa");
     }
     public void enableCommands(){
         getCommand("dfreeze").setExecutor(new freezeCommand(this));
         getCommand("dvanish").setExecutor(new vanishCommand(this,"vanish"));
         getCommand("dvlist").setExecutor(new vanishCommand(this,"vanishlist"));
         getCommand("dstaff").setExecutor(new staffCommand(this));
+        getCommand("dfly").setExecutor(new flyCommand(this));
     }
     @Override
     public void onDisable() {
@@ -127,17 +131,16 @@ public final class DripperS_Core extends JavaPlugin {
     public void printOnEnableMessage(String module) {
         try {
             if(module.equalsIgnoreCase("staffMode")){
-                this.getLogger().info("DripperS-Core --> StaffMode");
-                this.getLogger().info("Successfully Enabled");
+                this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core (staff): "+ChatColor.GREEN+"Successfully Enabled");
             } else if (module.equalsIgnoreCase("stats")) {
-                this.getLogger().info("DripperS-Core --> Stats");
-                this.getLogger().info("Successfully Enabled");
+                this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core (stats): "+ChatColor.GREEN+"Successfully Enabled");
             }else if(module.equalsIgnoreCase("global")){
-                this.getLogger().info("DripperS-Core ");
-                this.getLogger().info("Successfully Enabled");
+                //usar el getserver.getconsolesender.sendmessage para poner los colores :)
+                this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.GREEN+"Successfully Enabled");
             }
-        } catch (Exception ignored) {
-            //Añadir excepcion
+        } catch (Exception e) {
+            this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.RED+"Error enabling the plugin");
+            this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.RED+e);
         }
     }
     private void getConfigFile(){
@@ -148,17 +151,15 @@ public final class DripperS_Core extends JavaPlugin {
     public void printOnDisableMessage(String module){
         try {
             if(module.equalsIgnoreCase("staffMode")){
-                this.getLogger().info("DripperS-Core --> StaffMode");
-                this.getLogger().info("Successfully Disabled");
+                this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core (staff): "+ChatColor.YELLOW+"Successfully Disabled");
             } else if (module.equalsIgnoreCase("stats")) {
-                this.getLogger().info("DripperS-Core --> Stats");
-                this.getLogger().info("Successfully Disabled");
+                this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core (stats): "+ChatColor.YELLOW+"Successfully Disabled");
             }else if(module.equalsIgnoreCase("global")){
-                this.getLogger().info("DripperS-Core");
-                this.getLogger().info("Successfully Disabled");
+                this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.YELLOW+"Successfully Disabled");
             }
-        } catch (Exception ignored) {
-            //Añadir excepcion
+        } catch (Exception e) {
+            this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.RED+"Error disabling the plugin");
+            this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.RED+e);
         }
     }
 }

@@ -8,12 +8,16 @@ import org.bukkit.configuration.file.YamlConfiguration;
  */
 public enum Lang {
     TITLE("title-name", "&3DripperS-Core : "),
-    INVALID_ARGS("invalid-args", "You did not provide any arguments when running the command."),
+    INVALID_ARGS("invalid-args", "&cYou did not provide any arguments when running the command."),
     PLAYER_ONLY("player-only", "Sorry but that can only be run by a player!"),
     MUST_BE_NUMBER("must-be-number", "&cYou need to specify a number, not a word."),
     NO_PERMS("no-permissions", "&cYou don't have permission for that!"),
     NO_ONLINE("no-online", "&cThe player is not online!"),
     COMMAND_EXAMPLE("command_example", "&6Example : "),
+    FLY_ENABLED("fly_enabled", "&2Fly has been enabled"),
+    FLY_DISABLED("fly_disabled", "&cFly has been disabled"),
+    FLY_OTHER_ENABLED("fly_other_enabled", "&2Fly to %t has been enabled"),
+    FLY_OTHER_DISABLED("fly_other_disabled", "&cFly to %t has been disabled"),
     NO_SELF_FREEZED("staff-no-self-freezed", "&cYou cant freeze Yourself."),
     PLAYER_FREEZED("staff-player-freezed", "&9%t is being freezed."),
     TARGET_FREEZED("staff-target-freezed", "&9You have been frozen."),
