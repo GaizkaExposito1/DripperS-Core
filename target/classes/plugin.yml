@@ -7,7 +7,7 @@ description: A Core for Survival Server
 
 
 commands:
-  staff:
+  dstaff:
     description: staff command for get staff items !CAUTION YOUR INVENTORY COULD BE DELETED!
     usage: /dstaff
     aliases:

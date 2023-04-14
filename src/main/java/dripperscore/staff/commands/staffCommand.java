@@ -1,22 +1,32 @@
 package dripperscore.staff.commands;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import dripperscore.DripperS_Core;
+import dripperscore.lang.Lang;
+import lombok.Getter;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
 
 public class staffCommand implements CommandExecutor {
+    @Getter
+    private final DripperS_Core core;
+
+    public staffCommand(DripperS_Core core) {
+        this.core = core;
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        Player player = (Player) sender ;
-        Inventory oldInventory = Bukkit.createInventory(player, 54, ChatColor.RED+"StaffMenu");
-        oldInventory.getContents();
-        Inventory staffInventory = Bukkit.createInventory(player, 9, ChatColor.RED+"StaffMenu");
-
+        //Player player = (Player) sender ;
+        //Inventory oldInventory = Bukkit.createInventory(player, 54, ChatColor.RED+"StaffMenu");
+        //oldInventory.getContents();
+        //Inventory staffInventory = Bukkit.createInventory(player, 9, ChatColor.RED+"StaffMenu");
+        if(sender instanceof Player){
+            Player player = (Player) sender;
+            player.sendMessage(  Lang.TITLE +"This command is currently creating");
+        }
         //player.inve
         return true;
     }

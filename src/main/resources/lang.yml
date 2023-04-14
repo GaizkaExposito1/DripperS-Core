@@ -17,7 +17,7 @@ staff-no-self-freezed: "&cYou cant freeze Yourself."
 staff-player-freezed: "&9%t is being freezed."
 staff-target-freezed: "&9You have been frozen."
 staff-player-unfreezed: "&2%t is being unfreezed."
-staff-target-unfreezed: "&2 You have been unfrozen."
+staff-target-unfreezed: "&2You have been unfrozen."
 
 staff-vanished: "&5You now are invisible to others."
 staff-unvanished: "&2You now are visible to others."

@@ -80,12 +80,14 @@ public class freezeCommand implements CommandExecutor {
     private void Freeze(Player target, Player player,String username){
         target.setWalkSpeed(0);
         target.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 200));
+        target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 200));
         target.setGameMode(GameMode.ADVENTURE);
         player.sendMessage(  Lang.TITLE.toString() + Lang.PLAYER_FREEZED.toString().replace("%t", target.getName()));
     }
     private void unFreeze(Player target, Player player,String username){
         target.setWalkSpeed(0.2f);
         target.removePotionEffect(PotionEffectType.JUMP);
+        target.removePotionEffect(PotionEffectType.SLOW);
         target.setGameMode(GameMode.SURVIVAL);
         player.sendMessage( Lang.TITLE.toString() + Lang.PLAYER_UNFREEZED.toString().replace("%t", target.getName()));
     }

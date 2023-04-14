@@ -3,6 +3,7 @@ package dripperscore;
 
 import dripperscore.lang.Lang;
 import dripperscore.staff.commands.freezeCommand;
+import dripperscore.staff.commands.staffCommand;
 import dripperscore.staff.commands.vanishCommand;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -28,7 +29,12 @@ public final class DripperS_Core extends JavaPlugin {
         enableCommands();
         createBBDDConnection();
     }
-
+    public void enableCommands(){
+        getCommand("dfreeze").setExecutor(new freezeCommand(this));
+        getCommand("dvanish").setExecutor(new vanishCommand(this,"vanish"));
+        getCommand("dvlist").setExecutor(new vanishCommand(this,"vanishlist"));
+        getCommand("dstaff").setExecutor(new staffCommand(this));
+    }
     @Override
     public void onDisable() {
         // Plugin shutdown logic
@@ -118,12 +124,6 @@ public final class DripperS_Core extends JavaPlugin {
     public File getLangFile() {
         return LANG_FILE;
     }
-    public void enableCommands(){
-        getCommand("dfreeze").setExecutor(new freezeCommand(this));
-        getCommand("dvanish").setExecutor(new vanishCommand(this,"vanish"));
-        getCommand("dvlist").setExecutor(new vanishCommand(this,"vanishlist"));
-    }
-
     public void printOnEnableMessage(String module) {
         try {
             if(module.equalsIgnoreCase("staffMode")){

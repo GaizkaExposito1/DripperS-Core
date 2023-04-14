@@ -14,11 +14,14 @@
 #                 - dripperscore.staffmode.vanish
 #                 - dripperscore.staffmode.vanish.others
 #                 - dripperscore.staffmode.vanishlist
+#
+#                 NOT IMPLEMENTED
 #                 - dripperSCore.Jobs.*
 #                 - dripperSCore.Stats.*
 #
 #             - USER permissions:
 #
+#                 NOT IMPLEMENTED
 #                 - Jobs:
 #                 - Stats:
 #                 - Jobs:
@@ -34,7 +37,6 @@
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 # GENERAL PLUGIN SETTINGS
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-notPermissonsText: You do noty have the required permission to run this command.
 lang: en
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 # SQL CONNECTION
@@ -49,9 +51,6 @@ sqlPass:
 # STAFF
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #
-# VANISH
-PlayerVanishedext: You are invisible to others
-PlayerUnVanishedText: You are not invisible to others
 #
 #
 #
