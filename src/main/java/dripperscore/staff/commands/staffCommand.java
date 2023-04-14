@@ -2,6 +2,7 @@ package dripperscore.staff.commands;
 
 import dripperscore.DripperS_Core;
 import dripperscore.lang.Lang;
+import dripperscore.staff.inventories.staffInventory;
 import lombok.Getter;
 
 import org.bukkit.command.Command;
@@ -19,14 +20,25 @@ public class staffCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        //Player player = (Player) sender ;
+
+        if(sender instanceof  Player){
+            Player player = (Player) sender ;
+            staffInventory gui = new staffInventory();
+            player.openInventory(gui.getInventory());
+        }
+        //
         //Inventory oldInventory = Bukkit.createInventory(player, 54, ChatColor.RED+"StaffMenu");
         //oldInventory.getContents();
         //Inventory staffInventory = Bukkit.createInventory(player, 9, ChatColor.RED+"StaffMenu");
-        if(sender instanceof Player){
-            Player player = (Player) sender;
-            player.sendMessage(  Lang.TITLE +"This command is currently creating");
-        }
+
+
+
+
+
+        //if(sender instanceof Player){
+        //    Player player = (Player) sender;
+        //    player.sendMessage(  Lang.TITLE +"This command is currently creating");
+        //}
         //player.inve
         return true;
     }

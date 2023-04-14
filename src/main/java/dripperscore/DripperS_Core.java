@@ -6,6 +6,7 @@ import dripperscore.other.commands.flyCommand;
 import dripperscore.staff.commands.freezeCommand;
 import dripperscore.staff.commands.staffCommand;
 import dripperscore.staff.commands.vanishCommand;
+import dripperscore.staff.listeners.staffMenuListener;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -29,6 +30,7 @@ public final class DripperS_Core extends JavaPlugin {
         getConfigFile();
         loadLang();
         enableCommands();
+        enableListeners();
         createBBDDConnection();
         this.getLogger().fine("Pruebaaa");
     }
@@ -38,6 +40,9 @@ public final class DripperS_Core extends JavaPlugin {
         getCommand("dvlist").setExecutor(new vanishCommand(this,"vanishlist"));
         getCommand("dstaff").setExecutor(new staffCommand(this));
         getCommand("dfly").setExecutor(new flyCommand(this));
+    }
+    public void enableListeners(){
+        getServer().getPluginManager().registerEvents(new staffMenuListener(), this);
     }
     @Override
     public void onDisable() {

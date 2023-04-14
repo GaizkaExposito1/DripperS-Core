@@ -18,6 +18,7 @@ public enum Lang {
     FLY_DISABLED("fly_disabled", "&cFly has been disabled"),
     FLY_OTHER_ENABLED("fly_other_enabled", "&2Fly to %t has been enabled"),
     FLY_OTHER_DISABLED("fly_other_disabled", "&cFly to %t has been disabled"),
+    STAFF_MENU_TITLE("staff-inventory-title", "&6Staff Menu"),
     NO_SELF_FREEZED("staff-no-self-freezed", "&cYou cant freeze Yourself."),
     PLAYER_FREEZED("staff-player-freezed", "&9%t is being freezed."),
     TARGET_FREEZED("staff-target-freezed", "&9You have been frozen."),
