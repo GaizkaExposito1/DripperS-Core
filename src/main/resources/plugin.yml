@@ -22,6 +22,13 @@ commands:
     usage: /dvanish
     aliases:
       - vanish
+  dvlist:
+    description: Lista de gente en Vanish
+    usage: /dvlist
+    aliases:
+      - vlist
+      - vanishlist
+      - dvanishlist
 #  dunfreeze:
 #    description: Comando para congelar a alguien
 #    usage: /dfreeze <username>

@@ -1,17 +1,15 @@
 package dripperscore.staff.commands;
 
 import dripperscore.DripperS_Core;
+import dripperscore.lang.Lang;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,61 +19,68 @@ public class vanishCommand implements CommandExecutor {
     @Getter
     private final DripperS_Core core;
     private final HashMap<UUID,Boolean> vanished;
+    String commandType;
     ArrayList<Player> invisible_List = new ArrayList<Player>();
 
-    public vanishCommand(DripperS_Core core) {
+    public vanishCommand(DripperS_Core core,String commandType) {
         this.core = core;
         this.vanished = new HashMap<>();
+        this.commandType = commandType;
 
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        String vanishMenssage = core.getConfig().getString("PlayerVanishedext");
-        String unVanishMenssage = core.getConfig().getString("PlayerUnVanishedText");
-        String notPermissons = core.getConfig().getString("notPermissonsText");
 
-        if(sender instanceof Player){
-            Player player = (Player) sender;
+        if(commandType == "vanishlist"){
+            if(sender instanceof  Player){
+                Player player = (Player) sender;
+                if(player.hasPermission("dripperscore.*") ||player.hasPermission("dripperscore.staffmode.*")
+                        ||player.hasPermission("dripperscore.staffmode.vanishlist")){
+                    String vanishPlayersList = Lang.STAFF_VANISH_LIST + "" ;
+                    player.sendMessage(Lang.TITLE.toString() + invisible_List.size() );
+                    for (Player people : invisible_List){
+                        vanishPlayersList = vanishPlayersList + people.getName() + ", ";
+                    }
+                    player.sendMessage(Lang.TITLE.toString() + vanishPlayersList);
+                }
+            }
+        } else if (commandType == "vanish") {
+            if(sender instanceof Player){
+                Player player = (Player) sender;
 
-            if(player.hasPermission("dripperscore.*") ||player.hasPermission("dripperscore.staffmode.*")
-                    ||player.hasPermission("dripperscore.staffmode.vanish")){
-                if(args.length != 0){
-                    if(player.hasPermission("dripperscore.staffmode.vanish.others")){
-                        String username = args[0];
-                        Player target = Bukkit.getServer().getPlayerExact(username);
-                        if(target!= null){
-                            if(!invisible_List.contains(target)){
-                                vanishOther(target,player,username);
+                if(player.hasPermission("dripperscore.*") ||player.hasPermission("dripperscore.staffmode.*")
+                        ||player.hasPermission("dripperscore.staffmode.vanish")){
+                    if(args.length != 0){
+                        if(player.hasPermission("dripperscore.staffmode.vanish.others")){
+                            String username = args[0];
+                            Player target = Bukkit.getServer().getPlayerExact(username);
+                            if(target!= null){
+                                if(!invisible_List.contains(target)){
+                                    vanishOther(target,player,username);
+                                }else{
+                                    unVanishOther(target,player,username);
+                                }
                             }else{
-                                unVanishOther(target,player,username);
+                                player.sendMessage(Lang.TITLE.toString() + Lang.NO_ONLINE);
                             }
                         }else{
-                            player.sendMessage("ERROR NO ENCONTRADO");
+                            player.sendMessage(Lang.TITLE.toString() + Lang.NO_PERMS);
                         }
-
                     }else{
-                        //ERROR NO PERMISSON
+                        if(!invisible_List.contains(player)){
+                            vanish(player);
+                        }else{
+                            unVanish(player);
+                        }
                     }
+
                 }else{
-                    for (Player people : core.getServer().getOnlinePlayers()){
-                        player.sendMessage("Online: " + people.getName().toString());
-                    }
-                    for (OfflinePlayer people : core.getServer().getOfflinePlayers()){
-                        player.sendMessage("OffLine: " + people.getName().toString());
-                    }
-                    if(!invisible_List.contains(player)){
-                        vanish(player);
-                    }else{
-                        unVanish(player);
-                    }
+                    sender.sendMessage(Lang.TITLE.toString() + Lang.NO_PERMS);
                 }
-
             }else{
-                sender.sendMessage(ChatColor.RED+notPermissons);
+                Bukkit.getLogger().info(Lang.TITLE.toString() + Lang.PLAYER_ONLY);
             }
-        }else{
-            Bukkit.getLogger().info(command + "an only execute being a player");
         }
         return true;
     }
@@ -84,31 +89,53 @@ public class vanishCommand implements CommandExecutor {
         for (Player people : Bukkit.getOnlinePlayers()){
             people.hidePlayer(player);
         }
-
         invisible_List.add(player);
-        player.sendMessage("MENSAJE DE QUE ERES IN VISIBLE");
+        player.sendMessage(Lang.TITLE.toString() + Lang.STAFF_VANISHED);
     }
     private void unVanish(Player player){
         for (Player people : Bukkit.getOnlinePlayers()){
             people.showPlayer(player);
         }
         invisible_List.remove(player);
-        player.sendMessage("MENSAJE DE QUE ERES VISIBLE");
+        player.sendMessage(Lang.TITLE.toString() + Lang.STAFF_UNVANISHED);
     }
     private void vanishOther(Player target, Player player, String username){
         for (Player people : Bukkit.getOnlinePlayers()){
             people.hidePlayer(target);
         }
         invisible_List.add(target);
-        player.sendMessage("MENSAJE DE QUE has hecho invisible a alguien");
-        target.sendMessage("MENSAJE DE QUE ERES IN VISIBLE");
+        player.sendMessage(Lang.TITLE.toString() + Lang.PLAYER_VANISHED);
+        target.sendMessage(Lang.TITLE.toString() + Lang.STAFF_VANISHED);
     }
     private void unVanishOther(Player target, Player player, String username){
         for (Player people : Bukkit.getOnlinePlayers()){
             people.showPlayer(target);
         }
         invisible_List.remove(target);
-        player.sendMessage("MENSAJE DE QUE has hecho visible a alguien");
-        target.sendMessage("MENSAJE DE QUE ERES VISIBLE");
+        player.sendMessage(Lang.TITLE.toString() + Lang.PLAYER_UNVANISHED);
+        target.sendMessage(Lang.TITLE.toString() + Lang.STAFF_UNVANISHED);
     }
 }
+
+
+
+
+
+
+
+
+/**
+ *                     //ESTO ES UNA COMPROBACION
+ *                     String listaOnline= "&7Online: ";
+ *                     String listaOffline= "&8Offline: ";
+ *                     for (Player people : Bukkit.getOnlinePlayers()){
+ *                         listaOnline= listaOnline + people.getName()+", ";
+ *                         //player.sendMessage("Online: " + people.getName().toString());
+ *                     }
+ *                     for (OfflinePlayer people : Bukkit.getOfflinePlayers()){
+ *                         listaOffline= listaOffline + people.getName()+", ";
+ *                         //player.sendMessage("OffLine: " + people.getName().toString());
+ *                     }
+ *                     player.sendMessage( Lang.TITLE.toString() + listaOnline);
+ *                     player.sendMessage( Lang.TITLE.toString() + listaOffline);
+ */

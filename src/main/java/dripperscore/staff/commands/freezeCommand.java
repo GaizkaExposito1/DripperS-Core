@@ -1,6 +1,7 @@
 package dripperscore.staff.commands;
 
 import dripperscore.DripperS_Core;
+import dripperscore.lang.Lang;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -26,45 +27,52 @@ public class freezeCommand implements CommandExecutor {
     }
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args ) {
-        String FreezedMenssage = core.getConfig().getString("PlayerFreezedText");
-        String unFreezedMenssage = core.getConfig().getString("PlayerUnFreezedText");
-        String notPermissons = core.getConfig().getString("notPermissonsText");
-
         if(sender instanceof Player){
             Player player = (Player) sender;
 
             if(player.hasPermission("dripperscore.*") ||player.hasPermission("dripperscore.staffmode.*")
                     ||player.hasPermission("dripperscore.staffmode.freeze") ||player.hasPermission("dripperscore.staffmode.unfreeze")  ){
                 if(args.length == 0){
-                    player.sendMessage(ChatColor.RED+"You did not provide any arguments when running the command");
-                    player. sendMessage(ChatColor.RED+"Example: /dfreeze <payer>");
+                    player.sendMessage(Lang.TITLE.toString() + Lang.INVALID_ARGS);
+                    player. sendMessage(Lang.TITLE.toString() + Lang.COMMAND_EXAMPLE + "/dfreeze <player>");
                 }else{
                     String username = args[0];
                     Player target =Bukkit.getServer().getPlayerExact(username);
 
                     if(target == null){
-                        player.sendMessage(ChatColor.RED+"This player is not online");
+                        player.sendMessage(Lang.TITLE.toString() + Lang.NO_ONLINE);
                     }else{
                         if(player != target){
                             if(!this.freezed.containsKey(player.getUniqueId())){
                                 this.freezed.put(player.getUniqueId(),true);
                                 Freeze(target, player, username);
-                                target.sendMessage(ChatColor.YELLOW +FreezedMenssage);
+                                target.sendMessage(Lang.TITLE.toString() + Lang.TARGET_FREEZED);
                             }else{
                                 this.freezed.remove(player.getUniqueId());
                                 unFreeze(target, player,username);
-                                target.sendMessage(ChatColor.GREEN + unFreezedMenssage);
+                                target.sendMessage(Lang.TITLE.toString() + Lang.TARGET_UNFREEZED);
                             }
                         }else{
-                            player.sendMessage(ChatColor.RED+"You cant Freeze Yourself");
+                            player.sendMessage(Lang.TITLE.toString() + Lang.NO_SELF_FREEZED);
+
+
+                            if(!this.freezed.containsKey(player.getUniqueId())){
+                                this.freezed.put(player.getUniqueId(),true);
+                                Freeze(target, player, username);
+                                target.sendMessage(Lang.TITLE.toString() + Lang.TARGET_FREEZED);
+                            }else{
+                                this.freezed.remove(player.getUniqueId());
+                                unFreeze(target, player,username);
+                                target.sendMessage(Lang.TITLE.toString() + Lang.TARGET_UNFREEZED);
+                            }
                         }
                     }
                 }
             }else{
-                player.sendMessage(ChatColor.RED+notPermissons);
+                player.sendMessage(Lang.TITLE.toString() + Lang.NO_PERMS);
             }
         }else{
-            Bukkit.getLogger().info(command + "can only execute being a player");
+            Bukkit.getLogger().info(Lang.TITLE.toString() + Lang.PLAYER_ONLY);
         }
         return true;
     }
@@ -73,12 +81,12 @@ public class freezeCommand implements CommandExecutor {
         target.setWalkSpeed(0);
         target.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 200));
         target.setGameMode(GameMode.ADVENTURE);
-        player.sendMessage(ChatColor.YELLOW + username + "is being freezed");
+        player.sendMessage(  Lang.TITLE.toString() + Lang.PLAYER_FREEZED.toString().replace("%t", target.getName()));
     }
     private void unFreeze(Player target, Player player,String username){
         target.setWalkSpeed(0.2f);
         target.removePotionEffect(PotionEffectType.JUMP);
         target.setGameMode(GameMode.SURVIVAL);
-        player.sendMessage(ChatColor.GREEN + username + "is being Unfreezed");
+        player.sendMessage( Lang.TITLE.toString() + Lang.PLAYER_UNFREEZED.toString().replace("%t", target.getName()));
     }
 }

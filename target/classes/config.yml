@@ -13,6 +13,7 @@
 #                 - dripperscore.staffmode.freeze
 #                 - dripperscore.staffmode.vanish
 #                 - dripperscore.staffmode.vanish.others
+#                 - dripperscore.staffmode.vanishlist
 #                 - dripperSCore.Jobs.*
 #                 - dripperSCore.Stats.*
 #
@@ -34,6 +35,7 @@
 # GENERAL PLUGIN SETTINGS
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 notPermissonsText: You do noty have the required permission to run this command.
+lang: en
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 # SQL CONNECTION
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#

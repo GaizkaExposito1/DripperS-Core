@@ -1,0 +1,26 @@
+# Use & for color codes.
+
+# VARIABLES:
+# %p - player
+# %t - targetPlayer
+
+
+title-name: "&3DripperS-Core: "
+no-permissions: "&cYou don't have permission for that!"
+invalid-args: "You did not provide any arguments when running the command."
+no-online: "&cThe player is not online!"
+player-only: "&cSorry but that can only be run by a player!"
+must-be-number: "&cYou need to specify a number, not a word."
+command_example: "&6Example : "
+
+staff-no-self-freezed: "&cYou cant freeze Yourself."
+staff-player-freezed: "&9%t is being freezed."
+staff-target-freezed: "&9You have been frozen."
+staff-player-unfreezed: "&2%t is being unfreezed."
+staff-target-unfreezed: "&2 You have been unfrozen."
+
+staff-vanished: "&5You now are invisible to others."
+staff-unvanished: "&2You now are visible to others."
+staff-player-vanished: "&5%t is being invisible to others."
+staff-player-unvanished: "&2%t is being visible to others."
+staff-vanis-list : "&dStaff in vanish: "
