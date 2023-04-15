@@ -124,7 +124,7 @@ public class vanishCommand implements CommandExecutor {
 
 
 
-/**
+/*
  *                     //ESTO ES UNA COMPROBACION
  *                     String listaOnline= "&7Online: ";
  *                     String listaOffline= "&8Offline: ";

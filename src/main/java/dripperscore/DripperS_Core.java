@@ -75,7 +75,6 @@ public final class DripperS_Core extends JavaPlugin {
             }
         }else{
             this.getLogger().info("DripperS-Core --> Enabling WithOut SQL Connection");
-
         }
     }
     /**

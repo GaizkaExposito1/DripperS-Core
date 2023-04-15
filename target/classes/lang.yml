@@ -13,6 +13,8 @@ player-only: "&cSorry but that can only be run by a player!"
 must-be-number: "&cYou need to specify a number, not a word."
 command_example: "&6Example : "
 
+staff-inventory-title: "&6Staff Menu"
+
 staff-no-self-freezed: "&cYou cant freeze Yourself."
 staff-player-freezed: "&9%t is being freezed."
 staff-target-freezed: "&9You have been frozen."
