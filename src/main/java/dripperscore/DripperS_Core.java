@@ -26,13 +26,12 @@ public final class DripperS_Core extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        printOnEnableMessage("global");
         getConfigFile();
         loadLang();
-        enableCommands();
         enableListeners();
         createBBDDConnection();
-        this.getLogger().fine("Pruebaaa");
+        enableCommands();
+        printOnEnableMessage("global");
     }
     public void enableCommands(){
         getCommand("dfreeze").setExecutor(new freezeCommand(this));
@@ -60,21 +59,34 @@ public final class DripperS_Core extends JavaPlugin {
              * DARLE UNA PENSADA
              * DARLE UNA PENSADA
              */
-            String url = "jdbc:"+getConfig().getString("sqlType")+"://"+getConfig().getString("sqlUrl")+"/"+getConfig().getString("sqlBBDDName");
+            String bbddType = getConfig().getString("sqlType");
+            String bbddurl = getConfig().getString("sqlUrl");
+            String bbddport = getConfig().getString("sqlPort");
+            String bbddName = getConfig().getString("sqlBBDDName");
+            //String url = "jdbc:"+getConfig().getString("sqlType")+"://"+getConfig().getString("sqlUrl")+"/"+getConfig().getString("sqlBBDDName");
+            String url = "jdbc:"+bbddType+"://"+bbddurl+":"+bbddport+"/"+bbddName+"?useUnicode=true&characterEncoding=UTF-8";
+
+
             String user = getConfig().getString("sqlUser");
             String password = getConfig().getString("sqlPass");
 
             try {
                 Connection connection = DriverManager.getConnection(url, user, password);
-                this.getLogger().info("DripperS-Core --> SQL Connected");
+                //this.getLogger().info("DripperS-Core --> SQL Connected");
+                this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.GREEN+"SQL Connected");
 
             }catch (SQLException e){
-                e.printStackTrace();
-                this.getLogger().info("DripperS-Core --> Error connecting SQL");
-                this.getLogger().info(e.toString());
+                //e.printStackTrace();
+                //this.getLogger().info("DripperS-Core --> Error connecting SQL");
+                this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.RED+"Error connecting SQL");
+                this.getServer().getConsoleSender().sendMessage(ChatColor.YELLOW+e.toString());
+
+                //this.getLogger().info(e.toString());
             }
         }else{
-            this.getLogger().info("DripperS-Core --> Enabling WithOut SQL Connection");
+            //this.getLogger().info("DripperS-Core --> Enabling WithOut SQL Connection");
+            this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.YELLOW+"Enabling WithOut SQL Connection");
+
         }
     }
     /**

@@ -43,8 +43,10 @@ lang: en
 # SQL CONNECTION
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 sqlConnection : false
+#Now the only aviable sqltype is MySql. Time To time we add the h2 type or mongodb type.
 sqlType: MySQL
 sqlUrl: localhost
+sqlPort: 3306
 sqlBBDDName: Prueba
 sqlUser: root
 sqlPass:
