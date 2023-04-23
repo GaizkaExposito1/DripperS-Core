@@ -50,43 +50,19 @@ public final class DripperS_Core extends JavaPlugin {
     }
 
     public void createBBDDConnection(){
+
         if(getConfig().getString("sqlConnection").equalsIgnoreCase("true")){
-            /*
-             * DARLE UNA PENSADA
-             * DARLE UNA PENSADA
-             * DARLE UNA PENSADA
-             * DARLE UNA PENSADA
-             * DARLE UNA PENSADA
-             * DARLE UNA PENSADA
-             */
-            String bbddType = getConfig().getString("sqlType");
-            String bbddurl = getConfig().getString("sqlUrl");
-            String bbddport = getConfig().getString("sqlPort");
-            String bbddName = getConfig().getString("sqlBBDDName");
-            //String url = "jdbc:"+getConfig().getString("sqlType")+"://"+getConfig().getString("sqlUrl")+"/"+getConfig().getString("sqlBBDDName");
-            String url = "jdbc:"+bbddType+"://"+bbddurl+":"+bbddport+"/"+bbddName+"?useUnicode=true&characterEncoding=UTF-8";
 
-
+            String type = getConfig().getString("sqlType");
+            String url = getConfig().getString("sqlUrl");
+            String port = getConfig().getString("sqlPort");
+            String databaseName = getConfig().getString("sqlBBDDName");
             String user = getConfig().getString("sqlUser");
             String password = getConfig().getString("sqlPass");
-
-            try {
-                Connection connection = DriverManager.getConnection(url, user, password);
-                //this.getLogger().info("DripperS-Core --> SQL Connected");
-                this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.GREEN+"SQL Connected");
-
-            }catch (SQLException e){
-                //e.printStackTrace();
-                //this.getLogger().info("DripperS-Core --> Error connecting SQL");
-                this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.RED+"Error connecting SQL");
-                this.getServer().getConsoleSender().sendMessage(ChatColor.YELLOW+e.toString());
-
-                //this.getLogger().info(e.toString());
-            }
+            DatabaseManager dbManager = new DatabaseManager(this);
+            dbManager.createBBDDConnection(type,url,port,databaseName,user,password);
         }else{
-            //this.getLogger().info("DripperS-Core --> Enabling WithOut SQL Connection");
             this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.YELLOW+"Enabling WithOut SQL Connection");
-
         }
     }
     /**
