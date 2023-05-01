@@ -22,14 +22,15 @@ import java.sql.SQLException;
 public final class DripperS_Core extends JavaPlugin {
     public static YamlConfiguration LANG;
     public static File LANG_FILE;
+    DatabaseManager dbManager = new DatabaseManager(this);
 
     @Override
     public void onEnable() {
         // Plugin startup logic
+        createBBDDConnection();
         getConfigFile();
         loadLang();
         enableListeners();
-        createBBDDConnection();
         enableCommands();
         printOnEnableMessage("global");
     }
@@ -47,6 +48,8 @@ public final class DripperS_Core extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         printOnDisableMessage("global");
+        dbManager.closeConnection();
+
     }
 
     public void createBBDDConnection(){
@@ -59,7 +62,7 @@ public final class DripperS_Core extends JavaPlugin {
             String databaseName = getConfig().getString("sqlBBDDName");
             String user = getConfig().getString("sqlUser");
             String password = getConfig().getString("sqlPass");
-            DatabaseManager dbManager = new DatabaseManager(this);
+            //DatabaseManager dbManager = new DatabaseManager(this);
             dbManager.createBBDDConnection(type,url,port,databaseName,user,password);
         }else{
             this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.YELLOW+"Enabling WithOut SQL Connection");
@@ -103,6 +106,7 @@ public final class DripperS_Core extends JavaPlugin {
             this.getLogger().info("DripperS-Core --> Failed to save lang.yml.");
             this.getLogger().info("DripperS-Core --> Report this stack trace to <your name>.");
             e.printStackTrace();
+
         }
     }
     /**
@@ -121,18 +125,27 @@ public final class DripperS_Core extends JavaPlugin {
         return LANG_FILE;
     }
     public void printOnEnableMessage(String module) {
+        //DatabaseManager dbManager = new DatabaseManager(this);
+
         try {
             if(module.equalsIgnoreCase("staffMode")){
                 this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core (staff): "+ChatColor.GREEN+"Successfully Enabled");
+                dbManager.addLog(null,"Module Staff successfully enabled");
             } else if (module.equalsIgnoreCase("stats")) {
                 this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core (stats): "+ChatColor.GREEN+"Successfully Enabled");
+                dbManager.addLog(null,"Module stats successfully enabled");
+
             }else if(module.equalsIgnoreCase("global")){
                 //usar el getserver.getconsolesender.sendmessage para poner los colores :)
                 this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.GREEN+"Successfully Enabled");
+                dbManager.addLog(null,"DripperSCore Successfully enabled");
+
             }
         } catch (Exception e) {
             this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.RED+"Error enabling the plugin");
             this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.RED+e);
+            dbManager.addLog("ERROR","Error enabling DripperSCore: "+ e.toString());
+
         }
     }
     private void getConfigFile(){
@@ -141,17 +154,27 @@ public final class DripperS_Core extends JavaPlugin {
     }
 
     public void printOnDisableMessage(String module){
+        //DatabaseManager dbManager = new DatabaseManager(this);
+
         try {
             if(module.equalsIgnoreCase("staffMode")){
                 this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core (staff): "+ChatColor.YELLOW+"Successfully Disabled");
+                dbManager.addLog(null,"Module Staff successfully disabled");
+
             } else if (module.equalsIgnoreCase("stats")) {
                 this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core (stats): "+ChatColor.YELLOW+"Successfully Disabled");
+                dbManager.addLog(null,"Module Stats successfully disabled");
+
             }else if(module.equalsIgnoreCase("global")){
                 this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.YELLOW+"Successfully Disabled");
+                dbManager.addLog(null,"DripperSCore successfully disabled");
+
             }
         } catch (Exception e) {
             this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.RED+"Error disabling the plugin");
             this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.RED+e);
+            dbManager.addLog("ERROR","Error disabling DripperSCore: "+ e.toString());
+
         }
     }
 }

@@ -47,10 +47,14 @@ public class DatabaseManager {
                 statement = connection.prepareStatement("USE "+ this.DDBBName);
                 statement.executeUpdate();
 
+                createTableTests();
+                addLog(null,"SQL Connected");
 
                 createTableUsers();
 
+
                 core.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.GREEN+"SQL Connected");
+
 
             }catch (SQLException e){
                 core.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.RED+"Error connecting SQL");
@@ -62,22 +66,44 @@ public class DatabaseManager {
     public void createTableUsers(){
         try (
              PreparedStatement stmt = connection.prepareStatement(
-                     "CREATE TABLE IF NOT EXISTS users (" +
-                             "uuid BINARY(16) NOT NULL," +
-                             "username VARCHAR(255) NOT NULL," +
-                             "last_login DATETIME NOT NULL," +
-                             "first_ip VARCHAR(45) NOT NULL," +
-                             "last_ip VARCHAR(45) NOT NULL," +
-                             "PRIMARY KEY (uuid)" +
-                             ")"
+             "CREATE TABLE IF NOT EXISTS users (" +
+                     "uuid BINARY(16) NOT NULL," +
+                     "username VARCHAR(255) NOT NULL," +
+                     "last_login DATETIME NOT NULL," +
+                     "first_ip VARCHAR(45) NOT NULL," +
+                     "last_ip VARCHAR(45) NOT NULL," +
+                     "PRIMARY KEY (uuid)" +
+                     ")"
              )
         ) {
             stmt.execute();
-            System.out.println("Tabla 'users' creada exitosamente.");
+            //System.out.println("Tabla 'users' creada exitosamente.");
+            //addLog(null,"Tabla 'users' creada exitosamente");
+
         } catch (SQLException ex) {
             System.err.println("Error al crear tabla 'users': " + ex.getMessage());
+            addLog("ERROR","Error al crear tabla 'users': " + ex.getMessage());
+
         }
     }
+
+    public void createTableTests(){
+        try (
+              PreparedStatement stmt = connection.prepareStatement(
+                "CREATE TABLE IF NOT EXISTS logs ("+
+                        "id INT PRIMARY KEY AUTO_INCREMENT, "+
+                        "type VARCHAR(200) DEFAULT 'INFO' NOT NULL, "+
+                        "data VARCHAR(500), "+
+                        " timestamp TIMESTAMP )"
+              )
+        ) {
+            stmt.execute();
+            //System.out.println("Tabla 'logs' creada exitosamente.");
+        } catch (SQLException ex) {
+            System.err.println("Error al crear tabla 'logs': " + ex.getMessage());
+        }
+    }
+
     public User GetUserByUUID(UUID uuid){
         this.uuid = uuid;
         PreparedStatement statement = null;
@@ -93,6 +119,23 @@ public class DatabaseManager {
          }
 
         return null;
+    }
+    public void addLog(String type ,String log){
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO logs (type, data, timestamp) VALUES (?,?, ?)");
+            if(type != null){
+                preparedStatement.setString(1, type);
+            }else{
+                preparedStatement.setString(1, "INFO");
+            }
+            preparedStatement.setString(2, log);
+            preparedStatement.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+            preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            core.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.RED+"Error adding log");
+            core.getServer().getConsoleSender().sendMessage(ChatColor.YELLOW+e.toString());
+        }
+
     }
     public void SaveUser(User user){
         PreparedStatement statement = null;
@@ -127,6 +170,7 @@ public class DatabaseManager {
         }catch (SQLException e){
             core.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.RED+"Error saving user");
             core.getServer().getConsoleSender().sendMessage(ChatColor.YELLOW+e.toString());
+            addLog("ERROR", "Error saving user in users table: "+ e.toString());
         }
 
     }
@@ -135,11 +179,14 @@ public class DatabaseManager {
 
     public void closeConnection(){
         try{
+            addLog(null,"SQL Disconnected");
             connection.close();
-            core.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.YELLOW+"SQL Disconected");
+            core.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.YELLOW+"SQL Disconnected");
+
         }catch (SQLException e){
             core.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.RED+"Error Disconnecting SQL");
             core.getServer().getConsoleSender().sendMessage(ChatColor.YELLOW+e.toString());
+            addLog("ERROR", "Error Disconnecting SQL: "+ e.toString());
         }
     }
 }
