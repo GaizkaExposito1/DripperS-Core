@@ -31,10 +31,12 @@ public class vanishCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
+        String playerName = "";
         if(commandType == "vanishlist"){
             if(sender instanceof  Player){
                 Player player = (Player) sender;
+                playerName = player.getName();
+
                 if(player.hasPermission("dripperscore.*") ||player.hasPermission("dripperscore.staffmode.*")
                         ||player.hasPermission("dripperscore.staffmode.vanishlist")){
                     String vanishPlayersList = Lang.STAFF_VANISH_LIST + "" ;
@@ -48,6 +50,7 @@ public class vanishCommand implements CommandExecutor {
         } else if (commandType == "vanish") {
             if(sender instanceof Player){
                 Player player = (Player) sender;
+                playerName = player.getName();
 
                 if(player.hasPermission("dripperscore.*") ||player.hasPermission("dripperscore.staffmode.*")
                         ||player.hasPermission("dripperscore.staffmode.vanish")){
@@ -82,6 +85,8 @@ public class vanishCommand implements CommandExecutor {
                 Bukkit.getLogger().info(Lang.TITLE.toString() + Lang.PLAYER_ONLY);
             }
         }
+        core.dbManager.addCommandLog("Staff",playerName,commandType);
+
         return true;
     }
 

@@ -3,9 +3,11 @@ package dripperscore;
 
 import dripperscore.lang.Lang;
 import dripperscore.other.commands.flyCommand;
+import dripperscore.staff.commands.banGuiCommand;
 import dripperscore.staff.commands.freezeCommand;
 import dripperscore.staff.commands.staffCommand;
 import dripperscore.staff.commands.vanishCommand;
+import dripperscore.staff.listeners.joinLeftListeners;
 import dripperscore.staff.listeners.staffMenuListener;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -14,16 +16,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 
 public final class DripperS_Core extends JavaPlugin {
     public static YamlConfiguration LANG;
     public static File LANG_FILE;
-    DatabaseManager dbManager = new DatabaseManager(this);
-
+    public DatabaseManager dbManager = new DatabaseManager(this);
     @Override
     public void onEnable() {
         // Plugin startup logic
@@ -40,22 +38,20 @@ public final class DripperS_Core extends JavaPlugin {
         getCommand("dvlist").setExecutor(new vanishCommand(this,"vanishlist"));
         getCommand("dstaff").setExecutor(new staffCommand(this));
         getCommand("dfly").setExecutor(new flyCommand(this));
+        getCommand("dbangui").setExecutor(new banGuiCommand());
     }
     public void enableListeners(){
         getServer().getPluginManager().registerEvents(new staffMenuListener(), this);
+        getServer().getPluginManager().registerEvents(new joinLeftListeners(this), this);
     }
     @Override
     public void onDisable() {
         // Plugin shutdown logic
         printOnDisableMessage("global");
         dbManager.closeConnection();
-
     }
-
     public void createBBDDConnection(){
-
         if(getConfig().getString("sqlConnection").equalsIgnoreCase("true")){
-
             String type = getConfig().getString("sqlType");
             String url = getConfig().getString("sqlUrl");
             String port = getConfig().getString("sqlPort");
@@ -106,7 +102,6 @@ public final class DripperS_Core extends JavaPlugin {
             this.getLogger().info("DripperS-Core --> Failed to save lang.yml.");
             this.getLogger().info("DripperS-Core --> Report this stack trace to <your name>.");
             e.printStackTrace();
-
         }
     }
     /**
@@ -116,8 +111,8 @@ public final class DripperS_Core extends JavaPlugin {
     public YamlConfiguration getLang() {
         return LANG;
     }
-
     /**
+     *
      * Get the lang.yml file.
      * @return The lang.yml file.
      */
@@ -126,7 +121,6 @@ public final class DripperS_Core extends JavaPlugin {
     }
     public void printOnEnableMessage(String module) {
         //DatabaseManager dbManager = new DatabaseManager(this);
-
         try {
             if(module.equalsIgnoreCase("staffMode")){
                 this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core (staff): "+ChatColor.GREEN+"Successfully Enabled");
@@ -134,47 +128,38 @@ public final class DripperS_Core extends JavaPlugin {
             } else if (module.equalsIgnoreCase("stats")) {
                 this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core (stats): "+ChatColor.GREEN+"Successfully Enabled");
                 dbManager.addLog(null,"Module stats successfully enabled");
-
             }else if(module.equalsIgnoreCase("global")){
                 //usar el getserver.getconsolesender.sendmessage para poner los colores :)
                 this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.GREEN+"Successfully Enabled");
                 dbManager.addLog(null,"DripperSCore Successfully enabled");
-
             }
         } catch (Exception e) {
             this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.RED+"Error enabling the plugin");
             this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.RED+e);
             dbManager.addLog("ERROR","Error enabling DripperSCore: "+ e.toString());
-
         }
     }
     private void getConfigFile(){
         getConfig().options().copyDefaults();
         saveDefaultConfig();
     }
-
     public void printOnDisableMessage(String module){
         //DatabaseManager dbManager = new DatabaseManager(this);
-
         try {
             if(module.equalsIgnoreCase("staffMode")){
                 this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core (staff): "+ChatColor.YELLOW+"Successfully Disabled");
                 dbManager.addLog(null,"Module Staff successfully disabled");
-
             } else if (module.equalsIgnoreCase("stats")) {
                 this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core (stats): "+ChatColor.YELLOW+"Successfully Disabled");
                 dbManager.addLog(null,"Module Stats successfully disabled");
-
             }else if(module.equalsIgnoreCase("global")){
                 this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.YELLOW+"Successfully Disabled");
                 dbManager.addLog(null,"DripperSCore successfully disabled");
-
             }
         } catch (Exception e) {
             this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.RED+"Error disabling the plugin");
             this.getServer().getConsoleSender().sendMessage(ChatColor.AQUA+"DripperS-Core: "+ChatColor.RED+e);
             dbManager.addLog("ERROR","Error disabling DripperSCore: "+ e.toString());
-
         }
     }
 }

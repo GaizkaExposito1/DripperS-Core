@@ -15,21 +15,15 @@ public class staffMenuListener implements Listener {
             return;
         }
         if(e.getClickedInventory().getHolder() instanceof staffInventory){
-
             if(e.isLeftClick()){
                 if(e.getCurrentItem().getType() == Material.BARRIER){
                     Player player = (Player) e.getWhoClicked();
                     player.sendMessage("Ha clickado el kick event.");
                 }
-
-
             }
-
-
             e.setCancelled(true);
         }
 
 
     }
-
 }

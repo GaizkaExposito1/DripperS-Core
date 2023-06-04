@@ -54,7 +54,7 @@ public class freezeCommand implements CommandExecutor {
                             }
                         }else{
                             player.sendMessage(Lang.TITLE.toString() + Lang.NO_SELF_FREEZED);
-
+                            //TODO QUITAR QUE TE PUEDAS CONGELAR A TI MISMO
 
                             if(!this.freezed.containsKey(player.getUniqueId())){
                                 this.freezed.put(player.getUniqueId(),true);
@@ -83,6 +83,12 @@ public class freezeCommand implements CommandExecutor {
         target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 200));
         target.setGameMode(GameMode.ADVENTURE);
         player.sendMessage(  Lang.TITLE.toString() + Lang.PLAYER_FREEZED.toString().replace("%t", target.getName()));
+        core.dbManager.addCommandLog("Staff",player.getName().toString(),Lang.TITLE.toString() + Lang.PLAYER_FREEZED.toString().replace("%t", target.getName()));
+
+
+        String freezedPlayerUUID = target.getUniqueId().toString();
+        core.dbManager.GetUserByUUID(freezedPlayerUUID);
+        core.dbManager.Freeze(freezedPlayerUUID, true);
     }
     private void unFreeze(Player target, Player player,String username){
         target.setWalkSpeed(0.2f);
@@ -90,5 +96,11 @@ public class freezeCommand implements CommandExecutor {
         target.removePotionEffect(PotionEffectType.SLOW);
         target.setGameMode(GameMode.SURVIVAL);
         player.sendMessage( Lang.TITLE.toString() + Lang.PLAYER_UNFREEZED.toString().replace("%t", target.getName()));
+
+        core.dbManager.addCommandLog("Staff",player.getName().toString(),Lang.TITLE.toString() + Lang.PLAYER_UNFREEZED.toString().replace("%t", target.getName()));
+
+        String freezedPlayerUUID = target.getUniqueId().toString();
+        core.dbManager.GetUserByUUID(freezedPlayerUUID);
+        core.dbManager.Freeze(freezedPlayerUUID, false);
     }
 }

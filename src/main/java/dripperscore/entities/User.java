@@ -4,12 +4,13 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class User {
-    private UUID uuid;
+    private String uuid;
     private  String username;
     private LocalDateTime lastLogin;
     private  String lastIp;
     private  String firstIp;
-    public User(UUID uuid,String username,LocalDateTime lastLogin,String lastIp,String firstIp){
+    private  boolean freezed;
+    public User(String uuid,String username,LocalDateTime lastLogin,String lastIp,String firstIp){
         this.uuid = uuid;
         this.username = username;
         this.lastLogin = lastLogin;
@@ -18,11 +19,17 @@ public class User {
 
     }
 
-    public UUID getUuid() {
+    public User(String id, String username,boolean freezed) {
+        this.uuid = uuid;
+        this.username = username;
+        this.freezed = freezed;
+    }
+
+    public String getUuid() {
         return uuid;
     }
 
-    public void setUuid(UUID uuid) {
+    public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 
@@ -56,5 +63,12 @@ public class User {
 
     public void setFirstIp(String firstIp) {
         this.firstIp = firstIp;
+    }
+    public boolean getFreezed() {
+        return freezed;
+    }
+
+    public void setFreezed(boolean freezed) {
+        this.freezed = freezed;
     }
 }
