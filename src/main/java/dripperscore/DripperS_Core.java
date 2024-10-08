@@ -1,6 +1,7 @@
 package dripperscore;
 
 
+import dripperscore.MojanApi.pruebacommand;
 import dripperscore.lang.Lang;
 import dripperscore.other.commands.flyCommand;
 import dripperscore.staff.commands.banGuiCommand;
@@ -10,6 +11,8 @@ import dripperscore.staff.commands.vanishCommand;
 import dripperscore.staff.listeners.joinLeftListeners;
 import dripperscore.staff.listeners.staffMenuListener;
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -39,6 +42,7 @@ public final class DripperS_Core extends JavaPlugin {
         getCommand("dstaff").setExecutor(new staffCommand(this));
         getCommand("dfly").setExecutor(new flyCommand(this));
         getCommand("dbangui").setExecutor(new banGuiCommand());
+        getCommand("api").setExecutor(new pruebacommand(this));
     }
     public void enableListeners(){
         getServer().getPluginManager().registerEvents(new staffMenuListener(), this);
@@ -50,6 +54,8 @@ public final class DripperS_Core extends JavaPlugin {
         printOnDisableMessage("global");
         dbManager.closeConnection();
     }
+
+
     public void createBBDDConnection(){
         if(getConfig().getString("sqlConnection").equalsIgnoreCase("true")){
             String type = getConfig().getString("sqlType");

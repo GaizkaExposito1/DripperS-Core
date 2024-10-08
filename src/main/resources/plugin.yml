@@ -60,6 +60,10 @@ commands:
       - bangui
       - dban
       - ban
+  api:
+    description: Commando para conseguir el uuid del usuario (si es premiun)
+    usage: /api
+
 #  dunfreeze:
 #    description: Comando para congelar a alguien
 #    usage: /dfreeze <username>
